@@ -33,6 +33,16 @@ function Form() {
       e.preventDefault();
       console.log(e);
       // SyntheticBaseEvent {_reactName: 'onSubmit', _targetInst: null, type: 'submit', nativeEvent: SubmitEvent, target: form.add-form, ...}
+
+      if (!description) return;
+
+      const newItem = { description, quantity, packed: false, id: Date.now() };
+      console.log(newItem);
+      // {description: 'shirts', quantity: 10, packed: false, id: 1712506263662}
+
+      // Reset
+      setDescription("");
+      setQuantity(1);
   }
 
   return (
