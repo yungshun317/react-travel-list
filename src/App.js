@@ -32,6 +32,10 @@ export default function App() {
       );
   }
 
+  function handleClearList() {
+      setItems([]);
+  }
+
   return <div className="app">
     <Logo />
     <Form onAddItems={handleAddItems} />
@@ -39,6 +43,7 @@ export default function App() {
         items={items}
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
+        onClearList={handleClearList}
     />
     <Stats items={items} />
   </div>
@@ -114,7 +119,7 @@ function Form({ onAddItems }) {
   )
 }
 
-function PackingList({ items, onDeleteItem, onToggleItem }) {
+function PackingList({ items, onDeleteItem, onToggleItem, onClearList }) {
   const [sortBy, setSortBy] = useState("input");
   let sortedItems;
 
@@ -129,7 +134,7 @@ function PackingList({ items, onDeleteItem, onToggleItem }) {
       sortedItems = items
           .slice()
           .sort((a, b) => Number(a.packed) - Number(b.packed));
-    
+
   return <div className="list">
     <ul>
       {sortedItems.map(item => (
@@ -148,6 +153,7 @@ function PackingList({ items, onDeleteItem, onToggleItem }) {
             <option value="description">Sort by Description</option>
             <option value="packed">Sort by Packed Status</option>
         </select>
+        <button onClick={onClearList}>Clear List</button>
     </div>
   </div>
 }
